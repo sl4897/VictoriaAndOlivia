@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Victoria Math</title>
+    <link rel="stylesheet" href="src/styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="index.html" aria-label="Victoria And Olivia home">
+        <span class="brand-mark" aria-hidden="true">
+          <span class="rainbow-band rainbow-band-red"></span>
+          <span class="rainbow-band rainbow-band-sun"></span>
+          <span class="rainbow-band rainbow-band-sea"></span>
+        </span>
+        <span>Victoria And Olivia</span>
+      </a>
+      <button class="subtopic-link topbar-back-button" type="button" data-back-button data-back-fallback="index.html">상위 페이지</button>
+      <div class="topic-switch" aria-label="주제 선택">
+        <a class="topic-button" href="index.html#earth-return-game">SPACE</a>
+        <a class="topic-button is-active" href="math.html">MATH</a>
+      </div>
+      <nav class="nav-links" aria-label="수학 페이지 이동">
+        <a href="math.html">MATH 메인</a>
+        <a href="math-equation.html">방정식</a>
+        <a href="math-multi-equation.html">여러 방정식</a>
+      </nav>
+    </header>
+
+    <main class="math-home-main">
+      <section class="math-home-hero" aria-labelledby="math-home-title">
+        <p class="eyebrow">MATH</p>
+        <h1 id="math-home-title">수학 게임을 골라 시작해요.</h1>
+      </section>
+
+      <section class="math-card-grid" aria-label="수학 게임 카드">
+        <article class="math-card">
+          <h2>방정식</h2>
+          <p>★와 숫자 조각을 양쪽으로 옮기며 식의 균형을 익혀요.</p>
+          <a class="math-card-link" href="math-equation.html">게임 시작</a>
+        </article>
+        <article class="math-card">
+          <h2>여러 방정식</h2>
+          <p>10문제를 한 화면에서 풀고 전체 채점으로 결과를 확인해요.</p>
+          <a class="math-card-link" href="math-multi-equation.html">게임 시작</a>
+        </article>
+      </section>
+    </main>
+    <script src="src/back-button.js"></script>
+  </body>
+</html>

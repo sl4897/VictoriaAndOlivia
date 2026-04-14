@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Math Multi Equation</title>
+    <link rel="stylesheet" href="src/styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="index.html" aria-label="Victoria And Olivia home">
+        <span class="brand-mark" aria-hidden="true">
+          <span class="rainbow-band rainbow-band-red"></span>
+          <span class="rainbow-band rainbow-band-sun"></span>
+          <span class="rainbow-band rainbow-band-sea"></span>
+        </span>
+        <span>Victoria And Olivia</span>
+      </a>
+      <button class="subtopic-link topbar-back-button" type="button" data-back-button data-back-fallback="math.html">상위 페이지</button>
+      <div class="topic-switch" aria-label="주제 선택">
+        <a class="topic-button" href="index.html#earth-return-game">SPACE</a>
+        <a class="topic-button is-active" href="math.html">MATH</a>
+      </div>
+      <nav class="nav-links" aria-label="수학 페이지 이동">
+        <a href="math.html">MATH 메인</a>
+        <a href="math-equation.html">방정식</a>
+        <a href="math-multi-equation.html">여러 방정식</a>
+      </nav>
+    </header>
+
+    <main class="math-game-main">
+      <section class="equation-section single-column" aria-labelledby="multi-equation-title">
+        <div class="equation-copy">
+          <p class="eyebrow">수학 도전</p>
+          <h1 id="multi-equation-title">여러 방정식 10문제를 한 번에 풀어보세요.</h1>
+          <p>각 줄에서 ★와 숫자를 옮기고 정답을 입력한 뒤 전체 채점을 눌러보세요.</p>
+        </div>
+        <div class="equation-lab" aria-label="여러 방정식 10문제">
+          <div class="equation-tool-row" aria-label="여러 방정식 안내">
+            <p class="equation-quiz-progress" id="equationQuizProgress" aria-live="polite">정답 0 / 10</p>
+            <p id="equationQuizStatus">10문제를 입력하고 전체 채점을 눌러보세요.</p>
+          </div>
+          <ol class="equation-quiz-list" id="equationQuizList" aria-label="여러 방정식 목록"></ol>
+          <div class="quiz-action-row">
+            <button id="equationQuizCheckButton" type="button">전체 채점</button>
+            <button id="equationQuizResetButton" type="button">새 10문제</button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script src="src/back-button.js"></script>
+    <script src="src/math-multi-equation.js"></script>
+  </body>
+</html>

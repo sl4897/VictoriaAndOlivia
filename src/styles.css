@@ -35,11 +35,120 @@ a {
   text-decoration: none;
 }
 
+[hidden] {
+  display: none !important;
+}
+
+.profile-picker {
+  display: grid;
+  min-height: 100vh;
+  place-items: center;
+  padding: clamp(24px, 6vw, 72px);
+  background:
+    linear-gradient(135deg, #eaf8ff 0%, #f9fff2 52%, #fff3ed 100%);
+}
+
+.profile-picker-inner {
+  display: grid;
+  justify-items: center;
+  gap: 18px;
+  width: min(720px, 100%);
+  text-align: center;
+}
+
+.brand-mark.profile-rainbow {
+  position: relative;
+  width: 118px;
+  height: 118px;
+  overflow: visible;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.brand-mark.profile-rainbow .rainbow-band {
+  left: 50%;
+  bottom: -36px;
+  width: 142px;
+  height: 142px;
+  border-width: 14px;
+  border-top-color: transparent;
+  border-right-color: transparent;
+  border-bottom-color: transparent;
+  border-left-color: transparent;
+  border-radius: 50%;
+  transform: translateX(-50%) rotate(-45deg);
+}
+
+.brand-mark.profile-rainbow .rainbow-band-sun {
+  bottom: -26px;
+  width: 112px;
+  height: 112px;
+}
+
+.brand-mark.profile-rainbow .rainbow-band-sea {
+  bottom: -16px;
+  width: 82px;
+  height: 82px;
+}
+
+.brand-mark.profile-rainbow .rainbow-band-red {
+  border-top-color: #ed4a3c;
+  border-right-color: #ed4a3c;
+}
+
+.brand-mark.profile-rainbow .rainbow-band-sun {
+  border-top-color: #f6c333;
+  border-right-color: #f6c333;
+}
+
+.brand-mark.profile-rainbow .rainbow-band-sea {
+  border-top-color: #0f8cad;
+  border-right-color: #0f8cad;
+}
+
+.profile-brand-title {
+  margin: 0;
+  color: #131313;
+  font-size: clamp(2.6rem, 8.2vw, 5rem);
+  font-weight: 900;
+  line-height: 1.03;
+  text-shadow: 0 2px 0 rgba(255, 255, 255, 0.7);
+}
+
+.profile-picker h1 {
+  max-width: 680px;
+  margin-bottom: 6px;
+}
+
+.profile-actions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(150px, 1fr));
+  gap: 12px;
+  width: min(420px, 100%);
+}
+
+.profile-button {
+  min-height: 96px;
+  font-size: 1.85rem;
+  letter-spacing: 0;
+}
+
+.profile-button[data-profile-choice="olivia"] {
+  background: var(--coral);
+}
+
+.profile-note {
+  max-width: 520px;
+}
+
 .topbar {
   position: sticky;
   top: 0;
   z-index: 10;
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   gap: 24px;
@@ -58,6 +167,27 @@ a {
 
 .brand {
   font-weight: 800;
+}
+
+.topic-switch {
+  display: inline-flex;
+  gap: 8px;
+}
+
+.topic-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  min-width: 110px;
+  padding: 8px 14px;
+  border: 2px solid transparent;
+  font-size: 0.98rem;
+  font-weight: 900;
+}
+
+.topic-button.is-active {
+  background: var(--coral);
 }
 
 .brand-mark {
@@ -109,6 +239,35 @@ a {
   font-weight: 700;
 }
 
+.subtopic-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  width: 100%;
+  padding-top: 8px;
+  border-top: 1px solid var(--line);
+}
+
+.subtopic-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 34px;
+  padding: 6px 10px;
+  color: var(--ink);
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  font-size: 0.84rem;
+  font-weight: 800;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.subtopic-link:hover {
+  background: #f2fff5;
+}
+
 .game-shell {
   display: grid;
   grid-template-columns: minmax(220px, 0.8fr) minmax(420px, 1.8fr) minmax(220px, 0.7fr);
@@ -124,7 +283,7 @@ a {
 .game-copy,
 .toolbox,
 .learn-section,
-.mission-section {
+.playground-section {
   align-self: center;
 }
 
@@ -295,7 +454,7 @@ button:hover {
 
 .learn-section,
 .equation-section,
-.mission-section {
+.playground-section {
   padding: clamp(48px, 7vw, 88px) clamp(18px, 6vw, 72px);
 }
 
@@ -323,11 +482,6 @@ button:hover {
 
 .rule-card:nth-child(3) {
   border-top: 8px solid var(--violet);
-}
-
-.mission-section {
-  color: #fff;
-  background: #1e1e1e;
 }
 
 .equation-section {
@@ -426,6 +580,8 @@ button:hover {
 }
 
 .equation-tool-row {
+  display: grid;
+  gap: 8px;
   padding: 14px;
   background: #fff7df;
   border-radius: 8px;
@@ -479,22 +635,260 @@ button:hover {
   color: #ffb2aa;
 }
 
-.mission-list {
+.playground-section {
+  color: #fff;
+  background: #1e1e1e;
+}
+
+.math-home-main,
+.math-game-main {
+  padding: clamp(24px, 5vw, 64px);
+}
+
+.math-home-hero {
+  margin-bottom: 20px;
+}
+
+.math-card-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.math-card {
+  display: grid;
+  align-content: start;
+  gap: 12px;
+  min-height: 220px;
+  padding: 20px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+
+.math-card h2,
+.math-card p {
+  margin: 0;
+}
+
+.math-card-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 42px;
+  max-width: 140px;
+  padding: 8px 12px;
+  color: #fff;
+  background: var(--sea);
+  border-radius: 8px;
+  font-weight: 800;
+}
+
+.equation-section.single-column {
+  grid-template-columns: 1fr;
+  max-width: 980px;
+  margin-inline: auto;
+}
+
+.mini-game-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 14px;
   margin: 22px 0 0;
-  padding: 0;
-  list-style: none;
 }
 
-.mission-list li {
-  min-height: 110px;
+.mini-game {
+  display: grid;
+  align-content: start;
+  gap: 14px;
+  min-height: 360px;
   padding: 18px;
   background: rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 8px;
+}
+
+.mini-game h3,
+.mini-game p {
+  margin: 0;
+}
+
+.mini-game h3 {
+  font-size: 1.35rem;
+}
+
+.mini-game button {
+  background: var(--sea);
+}
+
+.star-pad-grid,
+.satellite-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.satellite-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.star-pad,
+.satellite-cell,
+.fuel-choice {
+  min-height: 64px;
+  color: var(--ink);
+  background: #fff;
+}
+
+.star-pad {
+  color: var(--sun);
+  font-size: 1.7rem;
+  text-shadow: 0 2px 0 #9f6f17;
+}
+
+.star-pad.is-lit {
+  color: #fff;
+  background: var(--sun);
+  transform: translateY(-2px);
+}
+
+.satellite-cell.is-found,
+.fuel-choice.is-correct {
+  color: #fff;
+  background: var(--leaf);
+}
+
+.satellite-cell.is-missed,
+.fuel-choice.is-incorrect {
+  color: #fff;
+  background: var(--coral);
+}
+
+.fuel-prompt {
+  display: grid;
+  min-height: 76px;
+  place-items: center;
+  color: var(--ink);
+  background: #fff7df;
+  border-radius: 8px;
+  font-size: 2rem;
   font-weight: 800;
+}
+
+.fuel-choices {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.mini-game-status {
+  min-height: 52px;
+}
+
+.equation-quiz-progress {
+  font-size: 0.95rem;
+  font-weight: 800;
+}
+
+.equation-quiz-list {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.equation-quiz-item {
+  display: grid;
+  grid-template-columns: 80px minmax(320px, 1fr) minmax(90px, 120px) minmax(140px, 1fr);
+  gap: 10px;
+  align-items: center;
+  padding: 10px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+
+.equation-quiz-expression {
+  color: var(--ink);
+  font-weight: 800;
+}
+
+.equation-quiz-input {
+  min-height: 40px;
+  padding: 6px 8px;
+  border: 2px solid var(--line);
+  border-radius: 8px;
+  font: inherit;
+  font-weight: 700;
+  text-align: center;
+}
+
+.equation-quiz-board {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: center;
+  gap: 8px;
+}
+
+.equation-quiz-side {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 52px;
+  padding: 6px;
+  background: #f7fbff;
+  border: 2px dashed rgba(24, 122, 140, 0.34);
+  border-radius: 8px;
+}
+
+.equation-quiz-side.is-dragging-over {
+  background: #f2fff5;
+  border-color: var(--leaf);
+}
+
+.equation-quiz-equals {
+  color: rgba(22, 22, 22, 0.72);
+  font-size: 1.2rem;
+  font-weight: 900;
+}
+
+.equation-quiz-term {
+  min-width: 46px;
+  min-height: 40px;
+  padding: 2px 8px;
+  font-size: 1.35rem;
+  box-shadow: none;
+}
+
+.equation-quiz-input.is-correct {
+  border-color: #4fbe6f;
+}
+
+.equation-quiz-input.is-incorrect {
+  border-color: var(--coral);
+}
+
+.equation-quiz-result {
+  color: rgba(22, 22, 22, 0.66);
+  font-size: 0.92rem;
+  font-weight: 800;
+}
+
+.equation-quiz-result.is-correct {
+  color: #2f7d4b;
+}
+
+.equation-quiz-result.is-incorrect {
+  color: #c5483f;
+}
+
+.quiz-action-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
 }
 
 @media (max-width: 1040px) {
@@ -511,8 +905,7 @@ button:hover {
 
 @media (max-width: 720px) {
   .topbar,
-  .hud,
-  .mission-list {
+  .hud {
     align-items: stretch;
     flex-direction: column;
   }
@@ -527,7 +920,23 @@ button:hover {
   .rule-grid,
   .equation-board,
   .equation-tool-row,
-  .mission-list {
+  .mini-game-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .topic-switch {
+    justify-content: center;
+  }
+
+  .subtopic-nav {
+    justify-content: center;
+  }
+
+  .equation-quiz-item {
+    grid-template-columns: 1fr;
+  }
+
+  .math-card-grid {
     grid-template-columns: 1fr;
   }
 
@@ -536,8 +945,12 @@ button:hover {
     font-size: 0.92rem;
   }
 
+  .profile-actions {
+    grid-template-columns: 1fr;
+  }
+
   .rule-grid,
-  .mission-list {
+  .mini-game-grid {
     display: grid;
   }
 

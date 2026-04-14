@@ -7,18 +7,15 @@ const toolButtons = document.querySelectorAll(".tool-card");
 const levelButtons = document.querySelectorAll(".level-button");
 const missionName = document.querySelector("#missionName");
 const missionHint = document.querySelector("#missionHint");
-const equationResetButton = document.querySelector("#equationResetButton");
-const equationStatus = document.querySelector("#equationStatus");
-const equationResult = document.querySelector("#equationResult");
-const equationLab = document.querySelector(".equation-lab");
-const equationDropZones = document.querySelectorAll("[data-equation-side]");
-const leftEquationTerms = document.querySelector("#leftEquationTerms");
-const rightEquationTerms = document.querySelector("#rightEquationTerms");
-const starAnswerInput = document.querySelector("#starAnswerInput");
-const answerFeedback = document.querySelector("#answerFeedback");
+const profilePicker = document.querySelector("#profilePicker");
+const siteHeader = document.querySelector("#siteHeader");
+const victoriaPage = document.querySelector("#victoriaPage");
+const profileChoiceNote = document.querySelector("#profileChoiceNote");
+const profileButtons = document.querySelectorAll("[data-profile-choice]");
 
 const WORLD_WIDTH = 960;
 const WORLD_HEIGHT = 560;
+const OBSTACLE_SCALE = 0.65;
 
 const state = {
   selectedTool: "planet",
@@ -36,24 +33,9 @@ const state = {
   animationId: null,
 };
 
-const equationState = {
-  left: ["star", "addend"],
-  right: ["total"],
-  signs: {
-    star: 1,
-    addend: 1,
-    total: 1,
-  },
-  values: {
-    addend: 5,
-    total: 7,
-    answer: 2,
-  },
-};
-
 const levels = [
   {
-    name: "Mission 1",
+    name: "단계 1",
     hint: "행성을 드래그해서 탐사선의 길을 살짝 구부려요.",
     start: { x: 110, y: 470 },
     velocity: { vx: 3.1, vy: -1.55 },
@@ -63,8 +45,8 @@ const levels = [
     obstacles: [],
   },
   {
-    name: "Mission 2",
-    hint: "위성이 더 높이 있어요. 무거운 행성 하나로 크게 꺾어보세요.",
+    name: "단계 2",
+    hint: "지구가 더 높이 있어요. 무거운 행성 하나로 크게 꺾어보세요.",
     start: { x: 90, y: 490 },
     velocity: { vx: 3.3, vy: -0.95 },
     goal: { x: 820, y: 78, radius: 28 },
@@ -76,7 +58,7 @@ const levels = [
     obstacles: [],
   },
   {
-    name: "Mission 3",
+    name: "단계 3",
     hint: "소행성에 닿으면 실패예요. 아래쪽으로 크게 돌아가요.",
     start: { x: 100, y: 310 },
     velocity: { vx: 3.2, vy: -0.18 },
@@ -92,7 +74,7 @@ const levels = [
     ],
   },
   {
-    name: "Mission 4",
+    name: "단계 4",
     hint: "두 소행성 사이의 좁은 길을 지나야 해요. 작은 힘을 여러 번 써보세요.",
     start: { x: 92, y: 115 },
     velocity: { vx: 3.05, vy: 0.84 },
@@ -107,6 +89,62 @@ const levels = [
       { x: 440, y: 245, radius: 50, label: "바위" },
       { x: 440, y: 365, radius: 50, label: "바위" },
       { x: 650, y: 325, radius: 46, label: "바위" },
+    ],
+  },
+  {
+    name: "단계 5",
+    hint: "중간 장애물을 피해 S자 모양으로 궤도를 꺾어보세요.",
+    start: { x: 96, y: 468 },
+    velocity: { vx: 3.2, vy: -1.15 },
+    goal: { x: 836, y: 118, radius: 26 },
+    maxPlanets: 5,
+    planets: [
+      { x: 290, y: 425, radius: 30, mass: 0.42, color: "#f1c44e", ring: "#e65f51" },
+      { x: 455, y: 225, radius: 34, mass: 0.55, color: "#f1c44e", ring: "#e65f51" },
+      { x: 660, y: 355, radius: 44, mass: 0.9, color: "#187a8c", ring: "#77d0dd" },
+    ],
+    obstacles: [
+      { x: 390, y: 335, radius: 48, label: "소행성" },
+      { x: 560, y: 235, radius: 44, label: "소행성" },
+    ],
+  },
+  {
+    name: "단계 6",
+    hint: "두 개의 소행성대를 넘어 지구까지 안전하게 통과해요.",
+    start: { x: 88, y: 172 },
+    velocity: { vx: 3.0, vy: 0.62 },
+    goal: { x: 842, y: 456, radius: 25 },
+    maxPlanets: 6,
+    planets: [
+      { x: 258, y: 145, radius: 30, mass: 0.42, color: "#f1c44e", ring: "#e65f51" },
+      { x: 408, y: 260, radius: 34, mass: 0.55, color: "#f1c44e", ring: "#e65f51" },
+      { x: 572, y: 420, radius: 30, mass: 0.42, color: "#f1c44e", ring: "#e65f51" },
+      { x: 726, y: 265, radius: 44, mass: 0.9, color: "#187a8c", ring: "#77d0dd" },
+    ],
+    obstacles: [
+      { x: 330, y: 235, radius: 44, label: "바위" },
+      { x: 500, y: 340, radius: 54, label: "바위" },
+      { x: 648, y: 360, radius: 46, label: "바위" },
+    ],
+  },
+  {
+    name: "단계 7",
+    hint: "마지막 단계예요. 여러 행성의 힘을 이어서 정밀 도착해요.",
+    start: { x: 98, y: 494 },
+    velocity: { vx: 3.28, vy: -1.22 },
+    goal: { x: 846, y: 88, radius: 23 },
+    maxPlanets: 6,
+    planets: [
+      { x: 246, y: 420, radius: 30, mass: 0.42, color: "#f1c44e", ring: "#e65f51" },
+      { x: 388, y: 300, radius: 44, mass: 0.9, color: "#187a8c", ring: "#77d0dd" },
+      { x: 560, y: 396, radius: 30, mass: 0.42, color: "#f1c44e", ring: "#e65f51" },
+      { x: 690, y: 210, radius: 44, mass: 0.9, color: "#187a8c", ring: "#77d0dd" },
+    ],
+    obstacles: [
+      { x: 340, y: 190, radius: 42, label: "소행성" },
+      { x: 515, y: 265, radius: 48, label: "소행성" },
+      { x: 620, y: 120, radius: 38, label: "소행성" },
+      { x: 760, y: 320, radius: 46, label: "바위" },
     ],
   },
 ];
@@ -142,7 +180,10 @@ function resetGame() {
   state.start = { ...level.start };
   state.startVelocity = { ...level.velocity };
   state.goal = { ...level.goal };
-  state.obstacles = level.obstacles.map((obstacle) => ({ ...obstacle }));
+  state.obstacles = level.obstacles.map((obstacle) => ({
+    ...obstacle,
+    radius: Math.round(obstacle.radius * OBSTACLE_SCALE),
+  }));
   state.probe = {
     x: state.start.x,
     y: state.start.y,
@@ -151,11 +192,22 @@ function resetGame() {
     trail: [],
   };
   state.planets = level.planets.map((planet) => ({ ...planet }));
-  missionName.textContent = `${level.name} / ${levels.length}`;
+  missionName.textContent = `지구 귀환 게임 · ${level.name} / ${levels.length}`;
   missionHint.textContent = level.hint;
   updateLevelButtons();
   cancelAnimationFrame(state.animationId);
+  launchButton.textContent = "발사";
   draw();
+}
+
+function resetProbe() {
+  state.probe = {
+    x: state.start.x,
+    y: state.start.y,
+    vx: state.startVelocity.vx,
+    vy: state.startVelocity.vy,
+    trail: [],
+  };
 }
 
 function canvasPoint(event) {
@@ -177,7 +229,7 @@ function findPlanet(point) {
 function addPlanet(point) {
   const level = levels[state.levelIndex];
   if (state.planets.length >= level.maxPlanets) {
-    missionHint.textContent = `이 미션은 행성을 ${level.maxPlanets}개까지만 쓸 수 있어요.`;
+    missionHint.textContent = `이 단계는 행성을 ${level.maxPlanets}개까지만 쓸 수 있어요.`;
     return null;
   }
   const isHeavy = state.selectedTool === "heavy";
@@ -199,7 +251,9 @@ function launch() {
   if (state.running) {
     return;
   }
+  resetProbe();
   state.running = true;
+  launchButton.textContent = "다시 발사";
   missionHint.textContent = "탐사선이 중력에 끌려가는 길을 관찰해요.";
   tick();
 }
@@ -237,8 +291,8 @@ function updateProbe() {
     state.completedLevels.add(state.levelIndex);
     updateLevelButtons();
     missionHint.textContent = state.levelIndex === levels.length - 1
-      ? "성공! 마지막 미션까지 해냈어요."
-      : "성공! 다음 미션으로 가볼까요?";
+      ? "성공! 마지막 단계까지 해냈어요."
+      : "성공! 다음 단계로 가볼까요?";
   }
 
   for (const obstacle of state.obstacles) {
@@ -305,26 +359,159 @@ function drawObstacle(obstacle) {
 
 function drawGoal() {
   const goal = state.goal;
-  ctx.strokeStyle = "#77d0dd";
-  ctx.lineWidth = 4;
+  const earthRadius = Math.max(18, goal.radius * 0.78);
+
+  ctx.save();
+
+  ctx.strokeStyle = "rgba(138, 217, 242, 0.7)";
+  ctx.lineWidth = 3;
   ctx.beginPath();
-  ctx.arc(goal.x, goal.y, goal.radius, 0, Math.PI * 2);
+  ctx.arc(goal.x, goal.y, earthRadius + 3, 0, Math.PI * 2);
   ctx.stroke();
 
-  ctx.fillStyle = "#f1c44e";
+  const ocean = ctx.createRadialGradient(
+    goal.x - earthRadius * 0.25,
+    goal.y - earthRadius * 0.4,
+    2,
+    goal.x,
+    goal.y,
+    earthRadius
+  );
+  ocean.addColorStop(0, "#9de3f7");
+  ocean.addColorStop(0.55, "#3b9dd9");
+  ocean.addColorStop(1, "#0f4b91");
+  ctx.fillStyle = ocean;
   ctx.beginPath();
-  ctx.arc(goal.x, goal.y, 12, 0, Math.PI * 2);
+  ctx.arc(goal.x, goal.y, earthRadius, 0, Math.PI * 2);
   ctx.fill();
+
+  ctx.beginPath();
+  ctx.arc(goal.x, goal.y, earthRadius, 0, Math.PI * 2);
+  ctx.clip();
+
+  ctx.fillStyle = "#4fbe6f";
+  ctx.beginPath();
+  ctx.moveTo(goal.x - earthRadius * 0.66, goal.y - earthRadius * 0.02);
+  ctx.bezierCurveTo(
+    goal.x - earthRadius * 0.56,
+    goal.y - earthRadius * 0.56,
+    goal.x - earthRadius * 0.18,
+    goal.y - earthRadius * 0.62,
+    goal.x + earthRadius * 0.08,
+    goal.y - earthRadius * 0.24
+  );
+  ctx.bezierCurveTo(
+    goal.x + earthRadius * 0.22,
+    goal.y - earthRadius * 0.04,
+    goal.x - earthRadius * 0.08,
+    goal.y + earthRadius * 0.2,
+    goal.x - earthRadius * 0.38,
+    goal.y + earthRadius * 0.16
+  );
+  ctx.closePath();
+  ctx.fill();
+
+  ctx.fillStyle = "#3fa860";
+  ctx.beginPath();
+  ctx.moveTo(goal.x + earthRadius * 0.02, goal.y + earthRadius * 0.02);
+  ctx.bezierCurveTo(
+    goal.x + earthRadius * 0.24,
+    goal.y - earthRadius * 0.08,
+    goal.x + earthRadius * 0.58,
+    goal.y + earthRadius * 0.02,
+    goal.x + earthRadius * 0.48,
+    goal.y + earthRadius * 0.33
+  );
+  ctx.bezierCurveTo(
+    goal.x + earthRadius * 0.36,
+    goal.y + earthRadius * 0.46,
+    goal.x + earthRadius * 0.1,
+    goal.y + earthRadius * 0.38,
+    goal.x + earthRadius * 0.02,
+    goal.y + earthRadius * 0.12
+  );
+  ctx.closePath();
+  ctx.fill();
+
+  ctx.strokeStyle = "rgba(255, 255, 255, 0.48)";
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.arc(goal.x + earthRadius * 0.08, goal.y - earthRadius * 0.05, earthRadius * 0.66, -0.35, 0.95);
+  ctx.stroke();
+
+  ctx.strokeStyle = "rgba(255, 255, 255, 0.34)";
+  ctx.beginPath();
+  ctx.arc(goal.x - earthRadius * 0.1, goal.y + earthRadius * 0.12, earthRadius * 0.52, -0.1, 1.35);
+  ctx.stroke();
+
+  ctx.fillStyle = "rgba(255, 255, 255, 0.28)";
+  ctx.beginPath();
+  ctx.arc(goal.x - earthRadius * 0.28, goal.y - earthRadius * 0.34, earthRadius * 0.24, 0, Math.PI * 2);
+  ctx.fill();
+
+  ctx.restore();
 
   ctx.fillStyle = "#fff";
   ctx.font = "800 14px system-ui";
-  ctx.fillText("위성", goal.x - 16, goal.y + 52);
+  ctx.fillText("지구", goal.x - 16, goal.y + 52);
 }
 
 function drawStart() {
+  const start = state.start;
+  const launchAngle = Math.atan2(state.startVelocity.vy, state.startVelocity.vx);
+  ctx.save();
+  ctx.translate(start.x, start.y);
+  ctx.rotate(launchAngle);
+
+  ctx.fillStyle = "rgba(255, 255, 255, 0.16)";
+  ctx.beginPath();
+  ctx.ellipse(-12, 0, 38, 12, 0, 0, Math.PI * 2);
+  ctx.fill();
+
+  ctx.fillStyle = "#f7fbff";
+  ctx.strokeStyle = "#77d0dd";
+  ctx.lineWidth = 3;
+  ctx.beginPath();
+  ctx.moveTo(34, 0);
+  ctx.lineTo(-14, -17);
+  ctx.lineTo(-8, 0);
+  ctx.lineTo(-14, 17);
+  ctx.closePath();
+  ctx.fill();
+  ctx.stroke();
+
+  ctx.fillStyle = "#e65f51";
+  ctx.beginPath();
+  ctx.moveTo(-10, -12);
+  ctx.lineTo(-32, -24);
+  ctx.lineTo(-24, -4);
+  ctx.closePath();
+  ctx.fill();
+
+  ctx.beginPath();
+  ctx.moveTo(-10, 12);
+  ctx.lineTo(-32, 24);
+  ctx.lineTo(-24, 4);
+  ctx.closePath();
+  ctx.fill();
+
+  ctx.fillStyle = "#187a8c";
+  ctx.beginPath();
+  ctx.arc(12, 0, 7, 0, Math.PI * 2);
+  ctx.fill();
+
+  ctx.fillStyle = "#f1c44e";
+  ctx.beginPath();
+  ctx.moveTo(-17, 0);
+  ctx.lineTo(-38, -8);
+  ctx.lineTo(-38, 8);
+  ctx.closePath();
+  ctx.fill();
+  ctx.restore();
+
   ctx.fillStyle = "#fff";
   ctx.font = "800 14px system-ui";
-  ctx.fillText("출발", state.start.x - 18, state.start.y - 26);
+  ctx.fillText("출발", start.x - 18, start.y + 42);
 }
 
 function drawPlanet(planet) {
@@ -397,135 +584,16 @@ function updateLevelButtons() {
   });
 }
 
-function resetEquation() {
-  const answer = 1 + Math.floor(Math.random() * 9);
-  const addend = 1 + Math.floor(Math.random() * 9);
-  const total = answer + addend;
-  equationState.left = ["star", "addend"];
-  equationState.right = ["total"];
-  equationState.signs = {
-    star: 1,
-    addend: 1,
-    total: 1,
-  };
-  equationState.values = {
-    addend,
-    total,
-    answer,
-  };
-  starAnswerInput.value = "";
-  answerFeedback.textContent = "";
-  answerFeedback.classList.remove("is-correct", "is-incorrect");
-  renderEquationTerms();
-  updateEquationStatus();
+function showVictoriaPage() {
+  profilePicker.hidden = true;
+  siteHeader.hidden = false;
+  victoriaPage.hidden = false;
+  window.location.hash = "earth-return-game";
+  requestAnimationFrame(resizeCanvas);
 }
 
-function tokenLabel(token) {
-  if (token === "star") {
-    return "★";
-  }
-
-  return String(equationState.values[token]);
-}
-
-function tokenName(token) {
-  if (token === "star") {
-    return "별";
-  }
-
-  return tokenLabel(token);
-}
-
-function signedTokenLabel(token, index) {
-  const sign = equationState.signs[token];
-  const label = tokenLabel(token);
-
-  if (index === 0) {
-    return sign < 0 ? `- ${label}` : label;
-  }
-
-  return `${sign < 0 ? "-" : "+"} ${label}`;
-}
-
-function createEquationTerm(token) {
-  const button = document.createElement("button");
-  button.className = `equation-term ${token === "star" ? "star-symbol" : ""}`;
-  button.type = "button";
-  button.draggable = true;
-  button.dataset.equationToken = token;
-  button.setAttribute("aria-label", `${tokenName(token)} 조각`);
-  button.textContent = tokenLabel(token);
-  return button;
-}
-
-function renderEquationSide(container, terms) {
-  container.replaceChildren();
-
-  if (terms.length === 0) {
-    const zero = document.createElement("span");
-    zero.className = "empty-side-zero";
-    zero.textContent = "0";
-    container.append(zero);
-    return;
-  }
-
-  terms.forEach((token, index) => {
-    const sign = equationState.signs[token];
-    const operator = index === 0 ? (sign < 0 ? "-" : "") : (sign < 0 ? "-" : "+");
-
-    if (operator) {
-      const operatorElement = document.createElement("span");
-      operatorElement.className = "term-operator";
-      operatorElement.textContent = operator;
-      container.append(operatorElement);
-    }
-
-    container.append(createEquationTerm(token));
-  });
-}
-
-function renderEquationTerms() {
-  renderEquationSide(leftEquationTerms, equationState.left);
-  renderEquationSide(rightEquationTerms, equationState.right);
-}
-
-function moveEquationTerm(token, side) {
-  if (!["star", "addend", "total"].includes(token) || !["left", "right"].includes(side)) {
-    return;
-  }
-
-  const currentSide = equationState.left.includes(token) ? "left" : "right";
-
-  if (currentSide !== side) {
-    equationState.signs[token] *= -1;
-  }
-
-  equationState.left = equationState.left.filter((term) => term !== token);
-  equationState.right = equationState.right.filter((term) => term !== token);
-  equationState[side].push(token);
-  renderEquationTerms();
-  updateEquationStatus();
-}
-
-function updateEquationStatus() {
-  const leftText = equationState.left.map((token, index) => signedTokenLabel(token, index)).join(" ") || "0";
-  const rightText = equationState.right.map((token, index) => signedTokenLabel(token, index)).join(" ") || "0";
-  equationStatus.textContent = `지금 식은 ${leftText} = ${rightText} 이에요. 조각을 끌거나 눌러서 옮겨보세요.`;
-}
-
-function checkStarAnswer() {
-  const answer = starAnswerInput.value.trim();
-
-  if (!answer) {
-    answerFeedback.textContent = "";
-    answerFeedback.classList.remove("is-correct", "is-incorrect");
-    return;
-  }
-
-  const isCorrect = Number(answer) === equationState.values.answer;
-  answerFeedback.textContent = isCorrect ? "맞아요!" : "다시 생각해봐요";
-  answerFeedback.classList.toggle("is-correct", isCorrect);
-  answerFeedback.classList.toggle("is-incorrect", !isCorrect);
+function showOliviaMessage() {
+  profileChoiceNote.textContent = "Olivia의 알파벳 게임은 다음에 여기서 시작할게요.";
 }
 
 toolButtons.forEach((button) => {
@@ -577,51 +645,26 @@ canvas.addEventListener("pointerup", (event) => {
 launchButton.addEventListener("click", launch);
 resetButton.addEventListener("click", resetGame);
 nextButton.addEventListener("click", () => loadLevel(state.levelIndex + 1));
-window.addEventListener("resize", resizeCanvas);
-
-equationLab.addEventListener("dragstart", (event) => {
-  const term = event.target.closest("[data-equation-token]");
-
-  if (!term) {
-    return;
+window.addEventListener("resize", () => {
+  if (!victoriaPage.hidden) {
+    resizeCanvas();
   }
-
-  event.dataTransfer.setData("text/plain", term.dataset.equationToken);
 });
 
-equationLab.addEventListener("click", (event) => {
-  const term = event.target.closest("[data-equation-token]");
-
-  if (!term) {
-    return;
-  }
-
-  const currentSide = term.closest("[data-equation-side]").dataset.equationSide;
-  moveEquationTerm(term.dataset.equationToken, currentSide === "left" ? "right" : "left");
-});
-
-equationDropZones.forEach((zone) => {
-  zone.addEventListener("dragover", (event) => {
-    event.preventDefault();
-    zone.classList.add("is-dragging-over");
-  });
-
-  zone.addEventListener("dragleave", () => {
-    zone.classList.remove("is-dragging-over");
-  });
-
-  zone.addEventListener("drop", (event) => {
-    event.preventDefault();
-    zone.classList.remove("is-dragging-over");
-    const token = event.dataTransfer.getData("text/plain");
-    moveEquationTerm(token, zone.dataset.equationSide);
+profileButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    if (button.dataset.profileChoice === "victoria") {
+      showVictoriaPage();
+      return;
+    }
+    showOliviaMessage();
   });
 });
-
-starAnswerInput.addEventListener("input", checkStarAnswer);
-equationResetButton.addEventListener("click", resetEquation);
 
 createStars();
 resetGame();
-resetEquation();
-resizeCanvas();
+draw();
+
+if (window.location.hash === "#earth-return-game") {
+  showVictoriaPage();
+}

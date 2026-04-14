@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Math Equation</title>
+    <link rel="stylesheet" href="src/styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="index.html" aria-label="Victoria And Olivia home">
+        <span class="brand-mark" aria-hidden="true">
+          <span class="rainbow-band rainbow-band-red"></span>
+          <span class="rainbow-band rainbow-band-sun"></span>
+          <span class="rainbow-band rainbow-band-sea"></span>
+        </span>
+        <span>Victoria And Olivia</span>
+      </a>
+      <button class="subtopic-link topbar-back-button" type="button" data-back-button data-back-fallback="math.html">상위 페이지</button>
+      <div class="topic-switch" aria-label="주제 선택">
+        <a class="topic-button" href="index.html#earth-return-game">SPACE</a>
+        <a class="topic-button is-active" href="math.html">MATH</a>
+      </div>
+      <nav class="nav-links" aria-label="수학 페이지 이동">
+        <a href="math.html">MATH 메인</a>
+        <a href="math-equation.html">방정식</a>
+        <a href="math-multi-equation.html">여러 방정식</a>
+      </nav>
+    </header>
+
+    <main class="math-game-main">
+      <section class="equation-section single-column" aria-labelledby="equation-title">
+        <div class="equation-copy">
+          <p class="eyebrow">방정식 실험실</p>
+          <h1 id="equation-title">등호를 기준으로 조각을 옮겨보세요.</h1>
+          <p>별과 숫자 조각을 잡고 등호 양쪽 칸으로 옮긴 뒤 ★의 값을 입력해보세요.</p>
+        </div>
+        <div class="equation-lab" aria-label="별 더하기 숫자 방정식 활동">
+          <div class="equation-board">
+            <div class="equation-side" data-equation-side="left">
+              <div class="term-list" id="leftEquationTerms" aria-label="등호 앞쪽 조각"></div>
+            </div>
+            <span class="equals-sign">=</span>
+            <div class="equation-side" data-equation-side="right">
+              <div class="term-list" id="rightEquationTerms" aria-label="등호 뒤쪽 조각"></div>
+            </div>
+          </div>
+          <div class="equation-tool-row" aria-label="방정식 안내">
+            <p id="equationStatus">★와 숫자를 등호 양쪽 칸으로 끌어보세요.</p>
+          </div>
+          <div class="equation-result" aria-live="polite">
+            <span class="star-symbol" aria-label="별">★</span>
+            <span>=</span>
+            <input id="starAnswerInput" class="star-answer-input" type="text" inputmode="numeric" aria-label="별의 값" />
+            <span class="answer-feedback" id="answerFeedback"></span>
+          </div>
+          <button id="equationResetButton" type="button">랜덤 문제</button>
+        </div>
+      </section>
+    </main>
+
+    <script src="src/back-button.js"></script>
+    <script src="src/math-equation.js"></script>
+  </body>
+</html>

@@ -7,8 +7,25 @@
     <link rel="stylesheet" href="src/styles.css" />
   </head>
   <body>
-    <header class="topbar">
-      <a class="brand" href="#game" aria-label="Victoria And Olivia home">
+    <section class="profile-picker" id="profilePicker" aria-labelledby="profile-picker-title">
+      <div class="profile-picker-inner">
+        <span class="brand-mark profile-rainbow" aria-hidden="true">
+          <span class="rainbow-band rainbow-band-red"></span>
+          <span class="rainbow-band rainbow-band-sun"></span>
+          <span class="rainbow-band rainbow-band-sea"></span>
+        </span>
+        <p class="eyebrow profile-brand-title">Victoria And Olivia</p>
+        <h1 id="profile-picker-title">오늘은 누구의 놀이터로 갈까요?</h1>
+        <div class="profile-actions" aria-label="페이지 선택">
+          <button class="profile-button" type="button" data-profile-choice="victoria">Victoria</button>
+          <button class="profile-button" type="button" data-profile-choice="olivia">Olivia</button>
+        </div>
+        <p class="profile-note" id="profileChoiceNote" aria-live="polite">Victoria는 우주 게임과 방정식 놀이가 있어요.</p>
+      </div>
+    </section>
+
+    <header class="topbar" id="siteHeader" hidden>
+      <a class="brand" href="#earth-return-game" aria-label="Victoria And Olivia home">
         <span class="brand-mark" aria-hidden="true">
           <span class="rainbow-band rainbow-band-red"></span>
           <span class="rainbow-band rainbow-band-sun"></span>
@@ -16,22 +33,28 @@
         </span>
         <span>Victoria And Olivia</span>
       </a>
+      <button class="subtopic-link topbar-back-button" type="button" data-back-button data-back-fallback="index.html">상위 페이지</button>
+      <div class="topic-switch" aria-label="Victoria 주제 선택">
+        <a class="topic-button is-active" href="#earth-return-game">SPACE</a>
+        <a class="topic-button" href="math.html">MATH</a>
+      </div>
       <nav class="nav-links" aria-label="주제 이동">
-        <a href="#game">게임</a>
-        <a href="#learn">배우기</a>
-        <a href="#equation">방정식</a>
-        <a href="#missions">미션</a>
+        <a href="#earth-return-game">지구 귀환 게임</a>
+        <a href="math.html">MATH 메인</a>
       </nav>
+      <div class="subtopic-nav" aria-label="하위 게임 선택">
+        <a class="subtopic-link" href="#earth-return-game">지구 귀환 게임</a>
+      </div>
     </header>
 
-    <main>
-      <section id="game" class="game-shell" aria-labelledby="game-title">
+    <main id="victoriaPage" hidden>
+      <section id="earth-return-game" class="game-shell" aria-labelledby="game-title">
         <div class="game-copy">
-          <p class="eyebrow">어린이를 위한 우주 실험실</p>
-          <h1 id="game-title">행성의 힘으로 길 잃은 탐사선을 구해요.</h1>
+          <p class="eyebrow">SPACE</p>
+          <h1 id="game-title">지구 귀환 게임</h1>
           <p>
             탐사선은 직선으로 날아가고, 행성 가까이에 오면 끌려가요.
-            행성을 놓고 발사해서 반짝이는 위성까지 보내보세요.
+            행성을 놓고 발사해서 지구까지 안전하게 돌아가 보세요.
           </p>
         </div>
 
@@ -39,13 +62,13 @@
           <canvas id="spaceCanvas" width="960" height="560"></canvas>
           <div class="hud">
             <div>
-              <strong id="missionName">Mission 1</strong>
+              <strong id="missionName">단계 1</strong>
               <span id="missionHint">행성을 드래그해서 탐사선의 길을 살짝 구부려요.</span>
             </div>
             <div class="hud-actions">
               <button id="launchButton" type="button">발사</button>
               <button id="resetButton" type="button">다시 놓기</button>
-              <button id="nextButton" type="button">다음 미션</button>
+              <button id="nextButton" type="button">다음 단계</button>
             </div>
           </div>
         </div>
@@ -63,86 +86,21 @@
           <p>
             행성이 무거울수록 탐사선을 더 세게 끌어당겨요. 너무 가까우면 빙글빙글 돌 수도 있어요.
           </p>
-          <div class="level-picker" aria-label="미션 선택">
-            <h3>미션 고르기</h3>
+          <div class="level-picker" aria-label="단계 선택">
+            <h3>단계 고르기</h3>
             <button class="level-button is-active" type="button" data-level="0">1. 첫 궤도</button>
-            <button class="level-button" type="button" data-level="1">2. 높은 위성</button>
+            <button class="level-button" type="button" data-level="1">2. 높은 지구</button>
             <button class="level-button" type="button" data-level="2">3. 소행성 피하기</button>
             <button class="level-button" type="button" data-level="3">4. 좁은 길 통과</button>
+            <button class="level-button" type="button" data-level="4">5. S자 궤도</button>
+            <button class="level-button" type="button" data-level="5">6. 이중 소행성대</button>
+            <button class="level-button" type="button" data-level="6">7. 마지막 도착</button>
           </div>
         </aside>
-      </section>
-
-      <section id="learn" class="learn-section" aria-labelledby="learn-title">
-        <div>
-          <p class="eyebrow">짧은 규칙</p>
-          <h2 id="learn-title">중력은 물체를 서로 끌어당겨요.</h2>
-        </div>
-        <div class="rule-grid">
-          <article class="rule-card">
-            <h3>1. 가까울수록 강해요</h3>
-            <p>탐사선이 행성 근처를 지나가면 길이 많이 휘어요.</p>
-          </article>
-          <article class="rule-card">
-            <h3>2. 무거울수록 강해요</h3>
-            <p>큰 행성은 작은 행성보다 탐사선을 더 크게 끌어당겨요.</p>
-          </article>
-          <article class="rule-card">
-            <h3>3. 속도가 중요해요</h3>
-            <p>너무 느리면 떨어지고, 너무 빠르면 목표를 지나쳐요.</p>
-          </article>
-        </div>
-      </section>
-
-      <section id="equation" class="equation-section" aria-labelledby="equation-title">
-        <div class="equation-copy">
-          <p class="eyebrow">방정식 실험실</p>
-          <h2 id="equation-title">등호를 기준으로 조각을 옮겨보세요.</h2>
-          <p>
-            별, 5, 7을 잡고 등호 양쪽 칸으로 옮겨보세요.
-            별이 어떤 수인지 생각한 뒤 아래에 답을 적어보세요.
-          </p>
-        </div>
-
-        <div class="equation-lab" aria-label="별 더하기 숫자 방정식 활동">
-          <div class="equation-board">
-            <div class="equation-side" data-equation-side="left">
-              <div class="term-list" id="leftEquationTerms" aria-label="등호 앞쪽 조각"></div>
-            </div>
-
-            <span class="equals-sign">=</span>
-
-            <div class="equation-side" data-equation-side="right">
-              <div class="term-list" id="rightEquationTerms" aria-label="등호 뒤쪽 조각"></div>
-            </div>
-          </div>
-
-          <div class="equation-tool-row" aria-label="방정식 안내">
-            <p id="equationStatus">★와 숫자를 등호 양쪽 칸으로 끌어보세요.</p>
-          </div>
-
-          <div class="equation-result" id="equationResult" aria-live="polite">
-            <span class="star-symbol" aria-label="별">★</span>
-            <span>=</span>
-            <input id="starAnswerInput" class="star-answer-input" type="text" inputmode="numeric" aria-label="별의 값" />
-            <span class="answer-feedback" id="answerFeedback"></span>
-          </div>
-
-          <button id="equationResetButton" type="button">랜덤 문제</button>
-        </div>
-      </section>
-
-      <section id="missions" class="mission-section" aria-labelledby="mission-title">
-        <p class="eyebrow">다음에 추가하기 좋은 미션</p>
-        <h2 id="mission-title">아이들이 직접 실험하는 우주 놀이터</h2>
-        <ul class="mission-list">
-          <li>소행성을 피해 위성으로 가기</li>
-          <li>달의 중력으로 방향 바꾸기</li>
-          <li>화성 착륙선의 낙하산 타이밍 맞추기</li>
-        </ul>
       </section>
     </main>
 
     <script src="src/main.js"></script>
+    <script src="src/back-button.js"></script>
   </body>
 </html>
