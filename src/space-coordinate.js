@@ -6,6 +6,10 @@ const moveShipButton = document.querySelector("#moveShipButton");
 const resetShipButton = document.querySelector("#resetShipButton");
 const shipStatus = document.querySelector("#coordinateShipStatus");
 const guideText = document.querySelector("#coordinateGuideText");
+const moveXDirSelect = document.querySelector("#moveXDirSelect");
+const moveYDirSelect = document.querySelector("#moveYDirSelect");
+const moveXStepsInput = document.querySelector("#moveXStepsInput");
+const moveYStepsInput = document.querySelector("#moveYStepsInput");
 
 const GRID_MIN = -10;
 const GRID_MAX = 10;
@@ -17,6 +21,7 @@ const SEGMENT_MS = 170;
 const state = {
   shipCell: { x: 0, y: 0 },
   shipDraw: { x: 0, y: 0 },
+  shipHeading: 0,
   target: null,
   animating: false,
   path: [],
@@ -237,23 +242,84 @@ function drawEarth(point) {
 
 function drawShip() {
   const p = gridToCanvas(state.shipDraw);
-  const angle = state.target
-    ? Math.atan2(state.target.y - state.shipDraw.y, state.target.x - state.shipDraw.x)
-    : 0;
 
   ctx.save();
   ctx.translate(p.x, p.y);
-  ctx.rotate(angle);
-  ctx.fillStyle = "#f7fbff";
+  ctx.rotate(state.shipHeading);
+
+  if (state.animating) {
+    const flameLength = 13 + Math.sin(performance.now() * 0.04) * 3;
+    const flame = ctx.createLinearGradient(-16, 0, -16 - flameLength, 0);
+    flame.addColorStop(0, "rgba(255,235,150,0.95)");
+    flame.addColorStop(0.45, "rgba(255,150,70,0.82)");
+    flame.addColorStop(1, "rgba(255,80,60,0)");
+    ctx.fillStyle = flame;
+    ctx.beginPath();
+    ctx.moveTo(-16, 0);
+    ctx.lineTo(-16 - flameLength, -4);
+    ctx.lineTo(-16 - flameLength, 4);
+    ctx.closePath();
+    ctx.fill();
+  }
+
+  const hull = ctx.createLinearGradient(-14, 0, 20, 0);
+  hull.addColorStop(0, "#7ea0bd");
+  hull.addColorStop(0.4, "#e9f2fa");
+  hull.addColorStop(1, "#9fc1d9");
+  ctx.fillStyle = hull;
   ctx.beginPath();
-  ctx.moveTo(16, 0);
-  ctx.lineTo(-12, -9);
-  ctx.lineTo(-7, 0);
-  ctx.lineTo(-12, 9);
+  ctx.moveTo(19, 0);
+  ctx.quadraticCurveTo(13, -8, 1, -10);
+  ctx.lineTo(-11, -7);
+  ctx.lineTo(-15, -3);
+  ctx.lineTo(-15, 3);
+  ctx.lineTo(-11, 7);
+  ctx.lineTo(1, 10);
+  ctx.quadraticCurveTo(13, 8, 19, 0);
   ctx.closePath();
   ctx.fill();
-  ctx.fillStyle = "#e65f51";
-  ctx.fillRect(-18, -5, 8, 10);
+
+  ctx.fillStyle = "#d74f5a";
+  ctx.beginPath();
+  ctx.moveTo(-8, -9);
+  ctx.lineTo(-19, -13);
+  ctx.lineTo(-14, -3);
+  ctx.closePath();
+  ctx.fill();
+  ctx.beginPath();
+  ctx.moveTo(-8, 9);
+  ctx.lineTo(-19, 13);
+  ctx.lineTo(-14, 3);
+  ctx.closePath();
+  ctx.fill();
+
+  ctx.fillStyle = "#f05345";
+  ctx.beginPath();
+  ctx.moveTo(19, 0);
+  ctx.lineTo(12, -5);
+  ctx.lineTo(12, 5);
+  ctx.closePath();
+  ctx.fill();
+
+  ctx.fillStyle = "#174a76";
+  ctx.beginPath();
+  ctx.ellipse(4, 0, 5, 4, 0, 0, Math.PI * 2);
+  ctx.fill();
+
+  ctx.strokeStyle = "rgba(255,255,255,0.55)";
+  ctx.lineWidth = 1.5;
+  ctx.beginPath();
+  ctx.moveTo(-6, -6);
+  ctx.lineTo(10, -4);
+  ctx.stroke();
+
+  ctx.strokeStyle = "rgba(10, 28, 44, 0.55)";
+  ctx.lineWidth = 1.5;
+  ctx.beginPath();
+  ctx.moveTo(-6, 6);
+  ctx.lineTo(10, 4);
+  ctx.stroke();
+
   ctx.restore();
 }
 
@@ -319,12 +385,19 @@ function beginNextSegment() {
     state.animating = false;
     state.shipDraw = { ...state.shipCell };
     setStatus();
-    guideText.textContent = `도착 완료! 다음 지구 좌표는 랜덤으로 바뀌었어요.`;
-    setRandomTarget();
+    if (state.target && state.shipCell.x === state.target.x && state.shipCell.y === state.target.y) {
+      guideText.textContent = `성공! 목표 좌표 (${state.target.x}, ${state.target.y})에 도착했어요.`;
+    } else if (state.target) {
+      guideText.textContent = `실패! 현재 (${state.shipCell.x}, ${state.shipCell.y}) / 목표 (${state.target.x}, ${state.target.y})`;
+    }
     return;
   }
   state.segmentFrom = { ...state.shipCell };
   state.segmentTo = { ...state.path[state.segmentIndex] };
+  state.shipHeading = Math.atan2(
+    -(state.segmentTo.y - state.segmentFrom.y),
+    state.segmentTo.x - state.segmentFrom.x
+  );
   state.segmentProgressMs = 0;
 }
 
@@ -335,17 +408,45 @@ function moveShip() {
   if (!state.target) {
     setRandomTarget();
   }
-  if (state.shipCell.x === state.target.x && state.shipCell.y === state.target.y) {
-    setRandomTarget();
+
+  const rawXSteps = Number(moveXStepsInput.value.trim());
+  const rawYSteps = Number(moveYStepsInput.value.trim());
+  const xSteps = Number.isInteger(rawXSteps) && rawXSteps >= 0 ? rawXSteps : NaN;
+  const ySteps = Number.isInteger(rawYSteps) && rawYSteps >= 0 ? rawYSteps : NaN;
+  if (Number.isNaN(xSteps) || Number.isNaN(ySteps)) {
+    guideText.textContent = "이동 칸 수는 0 이상의 정수로 입력해요.";
+    return;
   }
-  state.path = buildPath(state.shipCell, state.target);
+
+  const dx = moveXDirSelect.value === "left" ? -xSteps : xSteps;
+  const dy = moveYDirSelect.value === "down" ? -ySteps : ySteps;
+  if (dx === 0 && dy === 0) {
+    guideText.textContent = "이동 칸 수를 입력해 주세요.";
+    return;
+  }
+
+  const destination = {
+    x: state.shipCell.x + dx,
+    y: state.shipCell.y + dy,
+  };
+  if (
+    destination.x < GRID_MIN ||
+    destination.x > GRID_MAX ||
+    destination.y < GRID_MIN ||
+    destination.y > GRID_MAX
+  ) {
+    guideText.textContent = "격자 범위(-10~10)를 벗어나요. 칸 수를 줄여보세요.";
+    return;
+  }
+
+  state.path = buildPath(state.shipCell, destination);
   state.segmentIndex = 0;
   state.animating = state.path.length > 0;
   if (!state.animating) {
     guideText.textContent = "이미 도착해 있어요.";
     return;
   }
-  guideText.textContent = `이동 중... 목표 (${state.target.x}, ${state.target.y})`;
+  guideText.textContent = `이동 중... 현재 이동 목표 (${destination.x}, ${destination.y})`;
   beginNextSegment();
 }
 
@@ -355,14 +456,24 @@ function resetShip() {
   state.segmentIndex = 0;
   state.shipCell = { x: 0, y: 0 };
   state.shipDraw = { x: 0, y: 0 };
+  state.shipHeading = 0;
   setRandomTarget();
+  moveXDirSelect.value = "right";
+  moveYDirSelect.value = "up";
   setStatus();
-  guideText.textContent = "새 랜덤 지구가 생겼어요. 이동을 눌러 출발해요.";
+  guideText.textContent = "새 랜덤 지구가 생겼어요. 이동 방법을 입력하고 이동을 눌러요.";
 }
 
 function updateAnimation(deltaMs) {
   if (!state.animating) {
     state.shipDraw = { ...state.shipCell };
+    if (state.target) {
+      const dx = state.target.x - state.shipDraw.x;
+      const dy = state.target.y - state.shipDraw.y;
+      if (dx !== 0 || dy !== 0) {
+        state.shipHeading = Math.atan2(-dy, dx);
+      }
+    }
     return;
   }
 
@@ -405,6 +516,6 @@ buildBackgroundObjects();
 state.nextShootingStarAt = performance.now() + randomInt(1500, 4000);
 setRandomTarget();
 setStatus();
-guideText.textContent = "랜덤 지구가 생성됐어요. 이동을 눌러 출발해요.";
+guideText.textContent = "랜덤 지구가 생성됐어요. 이동 방법을 입력하고 이동을 눌러요.";
 resizeCanvas();
 state.renderId = requestAnimationFrame(loop);

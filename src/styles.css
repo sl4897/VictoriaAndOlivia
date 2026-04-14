@@ -501,6 +501,7 @@ button:hover {
 }
 
 .equation-lab {
+  position: relative;
   display: grid;
   gap: 18px;
   padding: 22px;
@@ -922,6 +923,115 @@ button:hover {
   gap: 8px;
 }
 
+.coordinate-move-row {
+  display: grid;
+  grid-template-columns: auto auto minmax(72px, 92px) auto auto auto minmax(72px, 92px) auto;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+
+.coordinate-select {
+  min-height: 38px;
+  padding: 6px 8px;
+  border: 2px solid var(--line);
+  border-radius: 8px;
+  font: inherit;
+  font-weight: 700;
+}
+
+.coordinate-step-input {
+  text-align: center;
+}
+
+.number-bonds-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.number-bonds-card {
+  min-height: 74px;
+  color: var(--ink);
+  background: #fff;
+  border: 2px solid rgba(22, 22, 22, 0.16);
+  font-size: 2rem;
+  font-weight: 900;
+}
+
+.number-bonds-card.is-selected {
+  border-color: var(--sea);
+  background: #eef8fb;
+}
+
+.number-bonds-result {
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.motivation-layer {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+}
+
+.motivation-burst {
+  display: grid;
+  justify-items: center;
+  gap: 8px;
+  opacity: 0;
+  transform: translateY(14px) scale(0.92);
+}
+
+.motivation-burst.is-visible {
+  animation: motivation-pop 900ms ease-out;
+}
+
+.motivation-text {
+  padding: 6px 14px;
+  color: #fff;
+  background: rgba(47, 125, 75, 0.94);
+  border: 2px solid rgba(255, 255, 255, 0.75);
+  border-radius: 8px;
+  font-size: 1.2rem;
+  font-weight: 900;
+}
+
+.motivation-mascot {
+  display: inline-grid;
+  width: 52px;
+  height: 52px;
+  place-items: center;
+  background: #fff7df;
+  border: 2px solid rgba(22, 22, 22, 0.2);
+  border-radius: 8px;
+  font-size: 1.8rem;
+  box-shadow: 0 10px 18px rgba(22, 22, 22, 0.18);
+}
+
+@keyframes motivation-pop {
+  0% {
+    opacity: 0;
+    transform: translateY(20px) scale(0.85);
+  }
+  20% {
+    opacity: 1;
+    transform: translateY(0) scale(1.05);
+  }
+  75% {
+    opacity: 1;
+    transform: translateY(-3px) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-18px) scale(0.96);
+  }
+}
+
 @media (max-width: 1040px) {
   .game-shell,
   .equation-section {
@@ -969,6 +1079,10 @@ button:hover {
 
   .math-card-grid {
     grid-template-columns: 1fr;
+  }
+
+  .coordinate-move-row {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .nav-links {

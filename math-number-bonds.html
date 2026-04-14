@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Math Number Bonds</title>
+    <link rel="stylesheet" href="src/styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="index.html" aria-label="Victoria And Olivia home">
+        <span class="brand-mark" aria-hidden="true">
+          <span class="rainbow-band rainbow-band-red"></span>
+          <span class="rainbow-band rainbow-band-sun"></span>
+          <span class="rainbow-band rainbow-band-sea"></span>
+        </span>
+        <span>Victoria And Olivia</span>
+      </a>
+      <button class="subtopic-link topbar-back-button" type="button" data-back-button data-back-fallback="math.html">상위 페이지</button>
+      <div class="topic-switch" aria-label="주제 선택">
+        <a class="topic-button" href="space.html">SPACE</a>
+        <a class="topic-button is-active" href="math.html">MATH</a>
+      </div>
+      <nav class="nav-links" aria-label="수학 페이지 이동">
+        <a href="math.html">MATH 메인</a>
+        <a href="math-equation.html">방정식</a>
+        <a href="math-multi-equation.html">여러 방정식</a>
+        <a href="math-number-bonds.html">10 친구 찾기</a>
+      </nav>
+    </header>
+
+    <main class="math-game-main">
+      <section class="equation-section single-column" aria-labelledby="number-bonds-title">
+        <div class="equation-copy">
+          <p class="eyebrow">10 친구 찾기</p>
+          <h1 id="number-bonds-title">목표 숫자가 되는 두 카드를 골라요.</h1>
+          <p>두 카드를 눌러 합을 만들고 정답을 확인해요. 10문제를 연속으로 풀 수 있어요.</p>
+        </div>
+        <div class="equation-lab" aria-label="10 친구 찾기 게임">
+          <div class="motivation-layer" id="motivationLayer" aria-live="polite">
+            <div class="motivation-burst" id="motivationBurst">
+              <span class="motivation-text" id="motivationText">Great!</span>
+              <span class="motivation-mascot" id="motivationMascot" aria-hidden="true">🧑‍🚀</span>
+            </div>
+          </div>
+          <div class="equation-tool-row">
+            <p id="numberBondsProgress">문제 1 / 10</p>
+            <p id="numberBondsTarget">목표: 10</p>
+            <p id="numberBondsStatus">두 카드를 골라보세요.</p>
+          </div>
+          <div class="number-bonds-grid" id="numberBondsGrid" aria-label="숫자 카드"></div>
+          <div class="equation-result number-bonds-result" aria-live="polite">
+            <span id="numberBondsSelection">선택: -</span>
+            <span id="numberBondsFeedback" class="answer-feedback"></span>
+          </div>
+          <div class="quiz-action-row">
+            <button id="numberBondsCheckButton" type="button">확인</button>
+            <button id="numberBondsNextButton" type="button">다음 문제</button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script src="src/back-button.js"></script>
+    <script src="src/math-number-bonds.js"></script>
+  </body>
+</html>

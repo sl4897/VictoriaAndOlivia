@@ -48,6 +48,27 @@
             <button id="moveShipButton" type="button">이동</button>
             <button id="resetShipButton" type="button">새 지구</button>
           </div>
+          <div class="coordinate-move-row" aria-label="이동 방법 입력">
+            <span>x 이동</span>
+            <select id="moveXDirSelect" class="coordinate-select" aria-label="x 이동 방향">
+              <option value="right">오른쪽</option>
+              <option value="left">왼쪽</option>
+            </select>
+            <input id="moveXStepsInput" class="equation-quiz-input coordinate-step-input" type="text" inputmode="numeric" value="0" aria-label="x 이동 칸 수" />
+            <span>칸</span>
+            <span>y 이동</span>
+            <select id="moveYDirSelect" class="coordinate-select" aria-label="y 이동 방향">
+              <option value="up">위</option>
+              <option value="down">아래</option>
+            </select>
+            <input id="moveYStepsInput" class="equation-quiz-input coordinate-step-input" type="text" inputmode="numeric" value="0" aria-label="y 이동 칸 수" />
+            <span>칸</span>
+          </div>
+          <div class="coordinate-difficulty-row" aria-label="난이도 선택">
+            <button class="coordinate-difficulty-btn" type="button" data-coordinate-difficulty="easy">쉬움</button>
+            <button class="coordinate-difficulty-btn is-active" type="button" data-coordinate-difficulty="normal">보통</button>
+            <button class="coordinate-difficulty-btn" type="button" data-coordinate-difficulty="hard">어려움</button>
+          </div>
           <div class="equation-tool-row">
             <p id="coordinateShipStatus">현재 좌표: (0, 0)</p>
             <p id="coordinateGuideText">입력 가능한 범위는 x, y 각각 -10 ~ 10이에요.</p>
