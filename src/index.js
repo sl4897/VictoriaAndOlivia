@@ -11,6 +11,10 @@ profileButtons.forEach((button) => {
       window.location.href = "space.html";
       return;
     }
+    if (button.dataset.profileChoice === "olivia") {
+      window.location.href = "olivia.html";
+      return;
+    }
     showOliviaMessage();
   });
 });

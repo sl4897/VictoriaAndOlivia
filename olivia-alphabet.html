@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Olivia Alphabet</title>
+    <link rel="stylesheet" href="src/styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="index.html" aria-label="Victoria And Olivia home">
+        <span class="brand-mark" aria-hidden="true">
+          <span class="rainbow-band rainbow-band-red"></span>
+          <span class="rainbow-band rainbow-band-sun"></span>
+          <span class="rainbow-band rainbow-band-sea"></span>
+        </span>
+        <span>Victoria And Olivia</span>
+      </a>
+      <button class="subtopic-link topbar-back-button" type="button" data-back-button data-back-fallback="olivia.html">상위 페이지</button>
+      <div class="topic-switch" aria-label="Olivia 주제 선택">
+        <a class="topic-button is-active" href="olivia-alphabet.html">ALPHABET</a>
+        <a class="topic-button" href="olivia-math.html">MATH</a>
+      </div>
+      <nav class="nav-links" aria-label="Olivia 페이지 이동">
+        <a href="olivia.html">OLIVIA 메인</a>
+        <a href="olivia-alphabet.html">Alphabet 메인</a>
+        <a href="olivia-alphabet-game.html">알파벳 게임</a>
+      </nav>
+    </header>
+
+    <main class="math-home-main">
+      <section class="math-home-hero" aria-labelledby="olivia-alphabet-title">
+        <p class="eyebrow">ALPHABET</p>
+        <h1 id="olivia-alphabet-title">알파벳 친구 찾기</h1>
+      </section>
+      <section class="math-card-grid" aria-label="Alphabet 게임 카드">
+        <article class="math-card">
+          <h2>같은 글자 고르기</h2>
+          <p>보이는 글자와 같은 알파벳을 눌러요.</p>
+          <a class="math-card-link" href="olivia-alphabet-game.html">게임 시작</a>
+        </article>
+      </section>
+    </main>
+
+    <script src="src/back-button.js"></script>
+  </body>
+</html>

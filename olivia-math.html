@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Olivia Math</title>
+    <link rel="stylesheet" href="src/styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="index.html" aria-label="Victoria And Olivia home">
+        <span class="brand-mark" aria-hidden="true">
+          <span class="rainbow-band rainbow-band-red"></span>
+          <span class="rainbow-band rainbow-band-sun"></span>
+          <span class="rainbow-band rainbow-band-sea"></span>
+        </span>
+        <span>Victoria And Olivia</span>
+      </a>
+      <button class="subtopic-link topbar-back-button" type="button" data-back-button data-back-fallback="olivia.html">상위 페이지</button>
+      <div class="topic-switch" aria-label="Olivia 주제 선택">
+        <a class="topic-button" href="olivia-alphabet.html">ALPHABET</a>
+        <a class="topic-button is-active" href="olivia-math.html">MATH</a>
+      </div>
+      <nav class="nav-links" aria-label="Olivia 페이지 이동">
+        <a href="olivia.html">OLIVIA 메인</a>
+        <a href="olivia-math.html">Math 메인</a>
+        <a href="olivia-math-game.html">수 세기 게임</a>
+      </nav>
+    </header>
+
+    <main class="math-home-main">
+      <section class="math-home-hero" aria-labelledby="olivia-math-title">
+        <p class="eyebrow">MATH</p>
+        <h1 id="olivia-math-title">작게 시작하는 수 세기</h1>
+      </section>
+      <section class="math-card-grid" aria-label="Math 게임 카드">
+        <article class="math-card">
+          <h2>별 개수 맞추기</h2>
+          <p>보이는 별의 개수와 같은 숫자를 눌러요.</p>
+          <a class="math-card-link" href="olivia-math-game.html">게임 시작</a>
+        </article>
+      </section>
+    </main>
+
+    <script src="src/back-button.js"></script>
+  </body>
+</html>

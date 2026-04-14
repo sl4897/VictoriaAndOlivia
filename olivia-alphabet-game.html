@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Olivia Alphabet Game</title>
+    <link rel="stylesheet" href="src/styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="index.html" aria-label="Victoria And Olivia home">
+        <span class="brand-mark" aria-hidden="true">
+          <span class="rainbow-band rainbow-band-red"></span>
+          <span class="rainbow-band rainbow-band-sun"></span>
+          <span class="rainbow-band rainbow-band-sea"></span>
+        </span>
+        <span>Victoria And Olivia</span>
+      </a>
+      <button class="subtopic-link topbar-back-button" type="button" data-back-button data-back-fallback="olivia-alphabet.html">상위 페이지</button>
+      <div class="topic-switch" aria-label="Olivia 주제 선택">
+        <a class="topic-button is-active" href="olivia-alphabet.html">ALPHABET</a>
+        <a class="topic-button" href="olivia-math.html">MATH</a>
+      </div>
+      <nav class="nav-links" aria-label="Olivia 페이지 이동">
+        <a href="olivia.html">OLIVIA 메인</a>
+        <a href="olivia-alphabet.html">Alphabet 메인</a>
+        <a href="olivia-alphabet-game.html">알파벳 게임</a>
+      </nav>
+    </header>
+
+    <main class="math-game-main">
+      <section class="equation-section single-column" aria-labelledby="olivia-alphabet-game-title">
+        <div class="equation-copy">
+          <p class="eyebrow">ALPHABET</p>
+          <h1 id="olivia-alphabet-game-title">같은 글자를 찾아 눌러요.</h1>
+          <p>큰 글자를 보고 아래 카드 중 같은 글자를 고르면 정답이에요.</p>
+        </div>
+        <div class="equation-lab" aria-label="알파벳 매칭 게임">
+          <div class="equation-result">
+            <span>찾을 글자:</span>
+            <span id="oliviaAlphabetTarget" class="olivia-target-letter">A</span>
+          </div>
+          <div class="olivia-game-grid" id="oliviaAlphabetGrid"></div>
+          <div class="equation-tool-row">
+            <p id="oliviaAlphabetStatus">카드를 눌러보세요.</p>
+          </div>
+          <div class="quiz-action-row">
+            <button id="oliviaAlphabetNextButton" type="button">새 문제</button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script src="src/back-button.js"></script>
+    <script src="src/olivia-alphabet-game.js"></script>
+  </body>
+</html>

@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Olivia Math Game</title>
+    <link rel="stylesheet" href="src/styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="index.html" aria-label="Victoria And Olivia home">
+        <span class="brand-mark" aria-hidden="true">
+          <span class="rainbow-band rainbow-band-red"></span>
+          <span class="rainbow-band rainbow-band-sun"></span>
+          <span class="rainbow-band rainbow-band-sea"></span>
+        </span>
+        <span>Victoria And Olivia</span>
+      </a>
+      <button class="subtopic-link topbar-back-button" type="button" data-back-button data-back-fallback="olivia-math.html">상위 페이지</button>
+      <div class="topic-switch" aria-label="Olivia 주제 선택">
+        <a class="topic-button" href="olivia-alphabet.html">ALPHABET</a>
+        <a class="topic-button is-active" href="olivia-math.html">MATH</a>
+      </div>
+      <nav class="nav-links" aria-label="Olivia 페이지 이동">
+        <a href="olivia.html">OLIVIA 메인</a>
+        <a href="olivia-math.html">Math 메인</a>
+        <a href="olivia-math-game.html">수 세기 게임</a>
+      </nav>
+    </header>
+
+    <main class="math-game-main">
+      <section class="equation-section single-column" aria-labelledby="olivia-math-game-title">
+        <div class="equation-copy">
+          <p class="eyebrow">MATH</p>
+          <h1 id="olivia-math-game-title">별이 몇 개인지 세어보아요.</h1>
+          <p>보이는 별 개수와 같은 숫자 버튼을 눌러요.</p>
+        </div>
+        <div class="equation-lab" aria-label="별 개수 맞추기 게임">
+          <div class="olivia-star-board" id="oliviaStarBoard"></div>
+          <div class="olivia-number-row" id="oliviaNumberRow"></div>
+          <div class="equation-tool-row">
+            <p id="oliviaMathStatus">별 개수를 세어 숫자를 골라요.</p>
+          </div>
+          <div class="quiz-action-row">
+            <button id="oliviaMathNextButton" type="button">새 문제</button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script src="src/back-button.js"></script>
+    <script src="src/olivia-math-game.js"></script>
+  </body>
+</html>

@@ -1013,6 +1013,63 @@ button:hover {
   box-shadow: 0 10px 18px rgba(22, 22, 22, 0.18);
 }
 
+.olivia-target-letter {
+  min-width: 62px;
+  text-align: center;
+  color: var(--sea);
+  font-size: 2.4rem;
+  font-weight: 900;
+}
+
+.olivia-game-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.olivia-option-button {
+  min-height: 72px;
+  color: var(--ink);
+  background: #fff;
+  border: 2px solid rgba(22, 22, 22, 0.16);
+  font-size: 2rem;
+  font-weight: 900;
+}
+
+.olivia-option-button.is-correct {
+  color: #fff;
+  background: var(--leaf);
+}
+
+.olivia-option-button.is-incorrect {
+  color: #fff;
+  background: var(--coral);
+}
+
+.olivia-star-board {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  min-height: 84px;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  background: #fff7df;
+  border-radius: 8px;
+}
+
+.olivia-star {
+  color: var(--sun);
+  text-shadow: 0 2px 0 #9f6f17;
+  font-size: 2rem;
+}
+
+.olivia-number-row {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 10px;
+}
+
 @keyframes motivation-pop {
   0% {
     opacity: 0;
@@ -1082,6 +1139,11 @@ button:hover {
   }
 
   .coordinate-move-row {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .olivia-game-grid,
+  .olivia-number-row {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
