@@ -1,5 +1,6 @@
 const equationQuizProgress = document.querySelector("#equationQuizProgress");
 const equationQuizList = document.querySelector("#equationQuizList");
+const equationLab = document.querySelector(".equation-lab");
 const equationQuizCheckButton = document.querySelector("#equationQuizCheckButton");
 const equationQuizResetButton = document.querySelector("#equationQuizResetButton");
 const equationQuizStatus = document.querySelector("#equationQuizStatus");
@@ -251,5 +252,8 @@ equationQuizList.addEventListener("drop", (event) => {
 
 equationQuizCheckButton.addEventListener("click", checkQuiz);
 equationQuizResetButton.addEventListener("click", resetQuiz);
+equationLab.addEventListener("touchmove", (event) => {
+  event.preventDefault();
+}, { passive: false });
 
 resetQuiz();

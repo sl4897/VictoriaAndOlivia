@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Math Space Coordinate</title>
+    <link rel="stylesheet" href="src/styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="index.html" aria-label="Victoria And Olivia home">
+        <span class="brand-mark" aria-hidden="true">
+          <span class="rainbow-band rainbow-band-red"></span>
+          <span class="rainbow-band rainbow-band-sun"></span>
+          <span class="rainbow-band rainbow-band-sea"></span>
+        </span>
+        <span>Victoria And Olivia</span>
+      </a>
+      <button class="subtopic-link topbar-back-button" type="button" data-back-button data-back-fallback="math.html">상위 페이지</button>
+      <div class="topic-switch" aria-label="주제 선택">
+        <a class="topic-button" href="space.html">SPACE</a>
+        <a class="topic-button is-active" href="math.html">MATH</a>
+      </div>
+      <nav class="nav-links" aria-label="수학 페이지 이동">
+        <a href="math.html">MATH 메인</a>
+        <a href="math-equation.html">방정식</a>
+        <a href="math-multi-equation.html">여러 방정식</a>
+        <a href="math-space-coordinate.html">우주 좌표</a>
+      </nav>
+    </header>
+
+    <main class="math-game-main">
+      <section class="equation-section single-column" aria-labelledby="space-coordinate-title">
+        <div class="equation-copy">
+          <p class="eyebrow">우주 좌표</p>
+          <h1 id="space-coordinate-title">이동 지시를 보고 최종 좌표를 구해보세요.</h1>
+          <p>출발 좌표에서 x, y 이동량을 차례대로 적용하고 마지막 좌표를 입력해요.</p>
+        </div>
+        <div class="equation-lab" aria-label="우주 좌표 계산 게임">
+          <div class="equation-tool-row">
+            <p id="coordinateStartText">출발 좌표: (0, 0)</p>
+            <ol id="coordinateMoveList"></ol>
+            <p id="coordinateStatus">최종 좌표를 입력하고 채점해보세요.</p>
+          </div>
+          <div class="equation-result" aria-live="polite">
+            <span>(</span>
+            <input id="coordinateAnswerX" class="equation-quiz-input coordinate-input" type="text" inputmode="numeric" aria-label="최종 x 좌표" />
+            <span>,</span>
+            <input id="coordinateAnswerY" class="equation-quiz-input coordinate-input" type="text" inputmode="numeric" aria-label="최종 y 좌표" />
+            <span>)</span>
+            <span class="answer-feedback" id="coordinateFeedback"></span>
+          </div>
+          <div class="quiz-action-row">
+            <button id="coordinateCheckButton" type="button">채점</button>
+            <button id="coordinateResetButton" type="button">랜덤 문제</button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script src="src/back-button.js"></script>
+    <script src="src/math-space-coordinate.js"></script>
+  </body>
+</html>

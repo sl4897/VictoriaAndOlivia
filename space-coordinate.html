@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Space Coordinate</title>
+    <link rel="stylesheet" href="src/styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="index.html" aria-label="Victoria And Olivia home">
+        <span class="brand-mark" aria-hidden="true">
+          <span class="rainbow-band rainbow-band-red"></span>
+          <span class="rainbow-band rainbow-band-sun"></span>
+          <span class="rainbow-band rainbow-band-sea"></span>
+        </span>
+        <span>Victoria And Olivia</span>
+      </a>
+      <button class="subtopic-link topbar-back-button" type="button" data-back-button data-back-fallback="space.html">상위 페이지</button>
+      <div class="topic-switch" aria-label="주제 선택">
+        <a class="topic-button is-active" href="space.html">SPACE</a>
+        <a class="topic-button" href="math.html">MATH</a>
+      </div>
+      <nav class="nav-links" aria-label="우주 페이지 이동">
+        <a href="space.html">SPACE 메인</a>
+        <a href="space-earth-return.html">지구 귀환 게임</a>
+        <a href="space-coordinate.html">우주 좌표</a>
+      </nav>
+    </header>
+
+    <main class="math-game-main">
+      <section class="equation-section single-column" aria-labelledby="space-coordinate-title">
+        <div class="equation-copy">
+          <p class="eyebrow">우주 좌표</p>
+          <h1 id="space-coordinate-title">좌표를 입력해 우주선을 이동시켜요.</h1>
+          <p>좌표 평면에서 x와 y를 입력하고 이동 버튼을 누르면 우주선이 해당 위치로 날아가요.</p>
+        </div>
+        <div class="equation-lab" aria-label="우주 좌표 이동 게임">
+          <div class="game-stage coordinate-stage">
+            <canvas id="coordinateCanvas" width="960" height="560"></canvas>
+          </div>
+          <div class="equation-result coordinate-controls" aria-live="polite">
+            <span>목표 좌표 (</span>
+            <input id="targetXInput" class="equation-quiz-input coordinate-input" type="text" inputmode="numeric" aria-label="목표 x 좌표" readonly />
+            <span>,</span>
+            <input id="targetYInput" class="equation-quiz-input coordinate-input" type="text" inputmode="numeric" aria-label="목표 y 좌표" readonly />
+            <span>)</span>
+            <button id="moveShipButton" type="button">이동</button>
+            <button id="resetShipButton" type="button">새 지구</button>
+          </div>
+          <div class="equation-tool-row">
+            <p id="coordinateShipStatus">현재 좌표: (0, 0)</p>
+            <p id="coordinateGuideText">입력 가능한 범위는 x, y 각각 -10 ~ 10이에요.</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script src="src/back-button.js"></script>
+    <script src="src/space-coordinate.js"></script>
+  </body>
+</html>

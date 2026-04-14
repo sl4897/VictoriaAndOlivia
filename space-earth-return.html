@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Space Earth Return</title>
+    <link rel="stylesheet" href="src/styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="index.html" aria-label="Victoria And Olivia home">
+        <span class="brand-mark" aria-hidden="true">
+          <span class="rainbow-band rainbow-band-red"></span>
+          <span class="rainbow-band rainbow-band-sun"></span>
+          <span class="rainbow-band rainbow-band-sea"></span>
+        </span>
+        <span>Victoria And Olivia</span>
+      </a>
+      <button class="subtopic-link topbar-back-button" type="button" data-back-button data-back-fallback="space.html">상위 페이지</button>
+      <div class="topic-switch" aria-label="주제 선택">
+        <a class="topic-button is-active" href="space.html">SPACE</a>
+        <a class="topic-button" href="math.html">MATH</a>
+      </div>
+      <nav class="nav-links" aria-label="우주 페이지 이동">
+        <a href="space.html">SPACE 메인</a>
+        <a href="space-earth-return.html">지구 귀환 게임</a>
+        <a href="space-coordinate.html">우주 좌표</a>
+      </nav>
+    </header>
+
+    <main>
+      <section id="earth-return-game" class="game-shell" aria-labelledby="game-title">
+        <div class="game-copy">
+          <p class="eyebrow">SPACE</p>
+          <h1 id="game-title">지구 귀환 게임</h1>
+          <p>
+            탐사선은 직선으로 날아가고, 행성 가까이에 오면 끌려가요.
+            행성을 놓고 발사해서 지구까지 안전하게 돌아가 보세요.
+          </p>
+        </div>
+
+        <div class="game-stage" aria-label="궤도 구조 게임">
+          <canvas id="spaceCanvas" width="960" height="560"></canvas>
+          <div class="hud">
+            <div>
+              <strong id="missionName">단계 1</strong>
+              <span id="missionHint">행성을 드래그해서 탐사선의 길을 살짝 구부려요.</span>
+            </div>
+            <div class="hud-actions">
+              <button id="launchButton" type="button">발사</button>
+              <button id="resetButton" type="button">다시 놓기</button>
+              <button id="nextButton" type="button">다음 단계</button>
+            </div>
+          </div>
+        </div>
+
+        <aside class="toolbox" aria-label="게임 도구">
+          <h2>오늘의 도구</h2>
+          <button class="tool-card is-active" type="button" data-tool="planet">
+            <span class="tool-icon planet"></span>
+            작은 행성
+          </button>
+          <button class="tool-card" type="button" data-tool="heavy">
+            <span class="tool-icon heavy"></span>
+            무거운 행성
+          </button>
+          <p>
+            행성이 무거울수록 탐사선을 더 세게 끌어당겨요. 너무 가까우면 빙글빙글 돌 수도 있어요.
+          </p>
+          <div class="level-picker" aria-label="단계 선택">
+            <h3>단계 고르기</h3>
+            <button class="level-button is-active" type="button" data-level="0">1. 첫 궤도</button>
+            <button class="level-button" type="button" data-level="1">2. 높은 지구</button>
+            <button class="level-button" type="button" data-level="2">3. 소행성 피하기</button>
+            <button class="level-button" type="button" data-level="3">4. 좁은 길 통과</button>
+            <button class="level-button" type="button" data-level="4">5. S자 궤도</button>
+            <button class="level-button" type="button" data-level="5">6. 이중 소행성대</button>
+            <button class="level-button" type="button" data-level="6">7. 마지막 도착</button>
+          </div>
+        </aside>
+      </section>
+    </main>
+
+    <script src="src/back-button.js"></script>
+    <script src="src/main.js"></script>
+  </body>
+</html>

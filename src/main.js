@@ -7,11 +7,6 @@ const toolButtons = document.querySelectorAll(".tool-card");
 const levelButtons = document.querySelectorAll(".level-button");
 const missionName = document.querySelector("#missionName");
 const missionHint = document.querySelector("#missionHint");
-const profilePicker = document.querySelector("#profilePicker");
-const siteHeader = document.querySelector("#siteHeader");
-const victoriaPage = document.querySelector("#victoriaPage");
-const profileChoiceNote = document.querySelector("#profileChoiceNote");
-const profileButtons = document.querySelectorAll("[data-profile-choice]");
 
 const WORLD_WIDTH = 960;
 const WORLD_HEIGHT = 560;
@@ -584,18 +579,6 @@ function updateLevelButtons() {
   });
 }
 
-function showVictoriaPage() {
-  profilePicker.hidden = true;
-  siteHeader.hidden = false;
-  victoriaPage.hidden = false;
-  window.location.hash = "earth-return-game";
-  requestAnimationFrame(resizeCanvas);
-}
-
-function showOliviaMessage() {
-  profileChoiceNote.textContent = "Olivia의 알파벳 게임은 다음에 여기서 시작할게요.";
-}
-
 toolButtons.forEach((button) => {
   button.addEventListener("click", () => {
     toolButtons.forEach((item) => item.classList.remove("is-active"));
@@ -645,26 +628,8 @@ canvas.addEventListener("pointerup", (event) => {
 launchButton.addEventListener("click", launch);
 resetButton.addEventListener("click", resetGame);
 nextButton.addEventListener("click", () => loadLevel(state.levelIndex + 1));
-window.addEventListener("resize", () => {
-  if (!victoriaPage.hidden) {
-    resizeCanvas();
-  }
-});
-
-profileButtons.forEach((button) => {
-  button.addEventListener("click", () => {
-    if (button.dataset.profileChoice === "victoria") {
-      showVictoriaPage();
-      return;
-    }
-    showOliviaMessage();
-  });
-});
+window.addEventListener("resize", resizeCanvas);
 
 createStars();
 resetGame();
 draw();
-
-if (window.location.hash === "#earth-return-game") {
-  showVictoriaPage();
-}

@@ -343,6 +343,14 @@ p {
   touch-action: none;
 }
 
+#coordinateCanvas {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 12 / 7;
+  touch-action: none;
+}
+
 .hud {
   display: flex;
   align-items: center;
@@ -508,6 +516,8 @@ button:hover {
   gap: 14px;
   align-items: center;
   min-height: 170px;
+  touch-action: none;
+  overscroll-behavior: contain;
 }
 
 .equation-side {
@@ -523,6 +533,7 @@ button:hover {
   border-radius: 8px;
   font-size: 2.8rem;
   font-weight: 900;
+  touch-action: none;
 }
 
 .equation-side.is-dragging-over {
@@ -565,6 +576,7 @@ button:hover {
   font-weight: 900;
   cursor: grab;
   user-select: none;
+  touch-action: none;
 }
 
 .equation-term:active {
@@ -829,6 +841,8 @@ button:hover {
   grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
   align-items: center;
   gap: 8px;
+  touch-action: none;
+  overscroll-behavior: contain;
 }
 
 .equation-quiz-side {
@@ -842,6 +856,7 @@ button:hover {
   background: #f7fbff;
   border: 2px dashed rgba(24, 122, 140, 0.34);
   border-radius: 8px;
+  touch-action: none;
 }
 
 .equation-quiz-side.is-dragging-over {
@@ -861,6 +876,7 @@ button:hover {
   padding: 2px 8px;
   font-size: 1.35rem;
   box-shadow: none;
+  touch-action: none;
 }
 
 .equation-quiz-input.is-correct {
@@ -889,6 +905,21 @@ button:hover {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 10px;
+}
+
+#coordinateMoveList {
+  display: grid;
+  gap: 6px;
+  margin: 0;
+  padding-left: 20px;
+}
+
+.coordinate-input {
+  width: 86px;
+}
+
+.coordinate-controls {
+  gap: 8px;
 }
 
 @media (max-width: 1040px) {

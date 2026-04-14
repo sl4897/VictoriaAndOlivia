@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Victoria Math</title>
+    <title>Victoria Space</title>
     <link rel="stylesheet" href="src/styles.css" />
   </head>
   <body>
@@ -18,35 +18,36 @@
       </a>
       <button class="subtopic-link topbar-back-button" type="button" data-back-button data-back-fallback="index.html">상위 페이지</button>
       <div class="topic-switch" aria-label="주제 선택">
-        <a class="topic-button" href="space.html">SPACE</a>
-        <a class="topic-button is-active" href="math.html">MATH</a>
+        <a class="topic-button is-active" href="space.html">SPACE</a>
+        <a class="topic-button" href="math.html">MATH</a>
       </div>
-      <nav class="nav-links" aria-label="수학 페이지 이동">
-        <a href="math.html">MATH 메인</a>
-        <a href="math-equation.html">방정식</a>
-        <a href="math-multi-equation.html">여러 방정식</a>
+      <nav class="nav-links" aria-label="우주 페이지 이동">
+        <a href="space.html">SPACE 메인</a>
+        <a href="space-earth-return.html">지구 귀환 게임</a>
+        <a href="space-coordinate.html">우주 좌표</a>
       </nav>
     </header>
 
     <main class="math-home-main">
-      <section class="math-home-hero" aria-labelledby="math-home-title">
-        <p class="eyebrow">MATH</p>
-        <h1 id="math-home-title">수학 게임을 골라 시작해요.</h1>
+      <section class="math-home-hero" aria-labelledby="space-home-title">
+        <p class="eyebrow">SPACE</p>
+        <h1 id="space-home-title">우주 게임을 골라 시작해요.</h1>
       </section>
 
-      <section class="math-card-grid" aria-label="수학 게임 카드">
+      <section class="math-card-grid" aria-label="우주 게임 카드">
         <article class="math-card">
-          <h2>방정식</h2>
-          <p>★와 숫자 조각을 양쪽으로 옮기며 식의 균형을 익혀요.</p>
-          <a class="math-card-link" href="math-equation.html">게임 시작</a>
+          <h2>지구 귀환 게임</h2>
+          <p>행성 중력을 이용해서 탐사선을 지구까지 안전하게 보내요.</p>
+          <a class="math-card-link" href="space-earth-return.html">게임 시작</a>
         </article>
         <article class="math-card">
-          <h2>여러 방정식</h2>
-          <p>10문제를 한 화면에서 풀고 전체 채점으로 결과를 확인해요.</p>
-          <a class="math-card-link" href="math-multi-equation.html">게임 시작</a>
+          <h2>우주 좌표</h2>
+          <p>좌표를 입력해서 우주선을 원하는 위치로 이동시켜요.</p>
+          <a class="math-card-link" href="space-coordinate.html">게임 시작</a>
         </article>
       </section>
     </main>
+
     <script src="src/back-button.js"></script>
   </body>
 </html>

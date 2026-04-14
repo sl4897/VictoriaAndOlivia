@@ -1,6 +1,7 @@
 const equationResetButton = document.querySelector("#equationResetButton");
 const equationStatus = document.querySelector("#equationStatus");
 const equationDropZones = document.querySelectorAll("[data-equation-side]");
+const equationLab = document.querySelector(".equation-lab");
 const leftEquationTerms = document.querySelector("#leftEquationTerms");
 const rightEquationTerms = document.querySelector("#rightEquationTerms");
 const starAnswerInput = document.querySelector("#starAnswerInput");
@@ -191,5 +192,9 @@ equationDropZones.forEach((zone) => {
 
 equationResetButton.addEventListener("click", resetEquation);
 starAnswerInput.addEventListener("input", checkAnswer);
+
+equationLab.addEventListener("touchmove", (event) => {
+  event.preventDefault();
+}, { passive: false });
 
 resetEquation();
